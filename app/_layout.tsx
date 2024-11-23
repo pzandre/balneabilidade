@@ -1,39 +1,68 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
+import { Stack } from "expo-router";
+import { Platform } from "react-native";
 
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
-
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+const Layout = () => {
+  const [fontsLoaded] = useFonts({
+    'Inter-Regular': require('@/assets/fonts/Inter_18pt-Medium.ttf'),
+    'Inter-Medium': require('@/assets/fonts/Inter_18pt-Regular.ttf'),
+    'Inter-SemiBold': require('@/assets/fonts/Inter_18pt-SemiBold.ttf'),
   });
 
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
+  if (!fontsLoaded) {
     return null;
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <Stack
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#ffffff',
+          ...Platform.select({
+            ios: {
+              shadowColor: 'rgba(0, 0, 0, 0.1)',
+              shadowOffset: { width: 0, height: 1 },
+              shadowOpacity: 1,
+              shadowRadius: 5,
+            },
+            android: {
+              elevation: 4,
+              borderBottomWidth: 1,
+              borderBottomColor: 'rgba(0, 0, 0, 0.1)',
+            },
+          }),
+        },
+        headerTitleStyle: {
+          fontFamily: 'Inter-SemiBold',
+          fontSize: 18,
+          color: '#1a1a1a',
+        },
+        headerTitleAlign: 'center',
+        animation: 'slide_from_right',
+        contentStyle: {
+          backgroundColor: '#f8f9fa',
+        },
+        headerTintColor: '#007AFF',
+        gestureEnabled: true,
+        gestureDirection: 'horizontal',
+        presentation: 'card',
+        statusBarStyle: 'dark',
+        statusBarAnimation: 'fade',
+      }}
+    >
+      <Stack.Screen
+        name="index"
+        options={{
+          title: 'Balneabilidade',
+          ...Platform.select({
+            ios: {
+              headerBlurEffect: 'regular',
+            },
+          }),
+        }}
+      />
+    </Stack>
   );
-}
+};
+
+export default Layout;
