@@ -1,10 +1,10 @@
 module.exports = {
   "expo": {
-    "name": "balneabilidade",
+    "name": "Balneabilidade Guarapari",
     "slug": "balneabilidade",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/logo.png",
+    "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -16,15 +16,15 @@ module.exports = {
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.aptechnology.Balneabilidade",
+      "bundleIdentifier": "com.balneabilidade.balneabilidade",
       "config": {
         "googleMapsApiKey": process.env.GOOGLE_MAPS_API_KEY
       }
     },
     "android": {
-      "package": "com.aptechnology.Balneabilidade",
+      "package": "com.balneabilidade.balneabilidade",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/logo.png",
+        "foregroundImage": "./assets/images/icon_adaptive_fore.png",
         "backgroundColor": "#ffffff"
       },
       "config": {
@@ -33,9 +33,15 @@ module.exports = {
         }
       }
     },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/00FF00pin_64.png"
+    },
     "plugins": [
       "expo-font",
-      "expo-router"
+      "expo-router",
+      "expo-splash-screen"
     ],
     "experiments": {
       "typedRoutes": true

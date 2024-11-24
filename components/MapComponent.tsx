@@ -13,8 +13,8 @@ export const MapComponent: React.FC<MapComponentProps> = ({ onMapRef }) => {
   const { locationData, centerRegion, defaultZoom } = useMap();
   const mapRef = useRef<any>();
 
-  const goodBeachIcon = "@/assets/images/00FF00pin_128.png";
-  const badBeachIcon = "@/assets/images/FF0000pin_128.png";
+  const goodBeachIcon = "@/assets/images/00FF00pin_64.png";
+  const badBeachIcon = "@/assets/images/FF0000pin_64.png";
 
   React.useEffect(() => {
     if (onMapRef && mapRef.current) {
