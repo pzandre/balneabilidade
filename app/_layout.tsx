@@ -19,12 +19,6 @@ const Layout = () => {
         headerStyle: {
           backgroundColor: '#ffffff',
           ...Platform.select({
-            ios: {
-              shadowColor: 'rgba(0, 0, 0, 0.1)',
-              shadowOffset: { width: 0, height: 1 },
-              shadowOpacity: 1,
-              shadowRadius: 5,
-            },
             android: {
               elevation: 4,
               borderBottomWidth: 1,
@@ -46,19 +40,12 @@ const Layout = () => {
         gestureEnabled: true,
         gestureDirection: 'horizontal',
         presentation: 'card',
-        statusBarStyle: 'dark',
-        statusBarAnimation: 'fade',
       }}
     >
       <Stack.Screen
         name="index"
         options={{
           title: 'Balneabilidade',
-          ...Platform.select({
-            ios: {
-              headerBlurEffect: 'regular',
-            },
-          }),
         }}
       />
     </Stack>

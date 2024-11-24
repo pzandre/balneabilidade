@@ -1,11 +1,12 @@
 import { useWeather } from '@/components/contexts/WeatherContext';
 import { WeatherBoxStyles } from '@/components/styles/stylesheets';
+import WeatherCondition from '@/constants/WeatherConditions';
 import { Cloud, CloudFog, CloudRain, CloudSnow, Sun } from 'lucide-react-native';
 import React from 'react';
 import { ActivityIndicator, Text, View } from 'react-native';
 
 interface WeatherIconProps {
-  condition: 'sunny' | 'cloudy' | 'rainy' | 'snowy' | 'foggy';
+  condition: WeatherCondition;
   size?: number;
 }
 

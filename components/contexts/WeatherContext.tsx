@@ -1,8 +1,9 @@
+import WeatherCondition from '@/constants/WeatherConditions';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
 interface WeatherData {
   temperature: number;
-  condition: 'sunny' | 'cloudy' | 'rainy' | 'snowy' | 'foggy';
+  condition: WeatherCondition;
 }
 
 interface WeatherContextType {
@@ -17,13 +18,22 @@ const WeatherContext = createContext<WeatherContextType | undefined>(undefined);
 export function WeatherProvider({ children }: { children: React.ReactNode }) {
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const backendUrl = process.env.EXPO_PUBLIC_BACKEND_URL || "http://localhost:8000/api/";
+  const backendApiKey = process.env.EXPO_PUBLIC_BACKEND_API_KEY;
 
   const fetchWeather = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('your-weather-api-endpoint');
+      const response = await fetch(
+        backendUrl + 'weather/',
+        {
+          headers: {
+            Authorization: `Api-Key ${backendApiKey}`,
+          }
+        }
+      );
       if (!response.ok) {
-        throw new Error('Weather data fetch failed');
+        throw new Error('Weather data fetch failed ' + JSON.stringify(response.json()));
       }
       const data = await response.json();
       setWeather(data);
@@ -32,7 +42,7 @@ export function WeatherProvider({ children }: { children: React.ReactNode }) {
       if (!weather) {
         setWeather({
           temperature: 25,
-          condition: 'sunny'
+          condition: WeatherCondition.Sunny,
         });
       }
     } finally {

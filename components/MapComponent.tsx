@@ -3,7 +3,7 @@ import { LastUpdateDisplay } from '@/components/LastUpdateDisplay';
 import { MapComponentStyles } from '@/components/styles/stylesheets';
 import React, { useRef } from 'react';
 import { View } from 'react-native';
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { Marker, PROVIDER_DEFAULT } from 'react-native-maps';
 
 interface MapComponentProps {
   onMapRef?: (ref: any) => void;
@@ -25,7 +25,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({ onMapRef }) => {
   return (
     <View style={MapComponentStyles.container}>
       <MapView
-        provider={PROVIDER_GOOGLE}
+        provider={PROVIDER_DEFAULT}
         googleMapId={process.env.EXPO_PUBLIC_MAP_ID}
         style={MapComponentStyles.map}
         region={centerRegion}

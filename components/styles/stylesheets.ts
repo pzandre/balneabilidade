@@ -36,9 +36,10 @@ const MapControlsStyles = StyleSheet.create({
 const LastUpdateDisplayStyles = StyleSheet.create({
   container: {
     position: 'absolute',
-    bottom: 16,
-    right: 16,
+    bottom: 30,
+    left: 16,
     zIndex: 1000,
+    opacity: 0.6,
   },
   badge: {
     backgroundColor: 'rgba(0, 0, 0, 0.7)',
