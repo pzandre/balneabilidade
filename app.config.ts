@@ -1,4 +1,5 @@
 module.exports = {
+  "owner": "andrepz",
   "expo": {
     "name": "balneabilidade",
     "slug": "balneabilidade",
