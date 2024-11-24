@@ -33,18 +33,17 @@ module.exports = {
         }
       }
     },
-    "web": {
-      "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/00FF00pin_128.png"
-    },
     "plugins": [
       "expo-font",
-      "expo-router",
-      "expo-splash-screen",
+      "expo-router"
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "fe727cc8-c224-4c77-8a6e-dc455bc1d861",
+      }
     }
   }
 }

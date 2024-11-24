@@ -7,7 +7,7 @@ import { WeatherBox } from '@/components/WeatherBox';
 
 import { SplashScreen, useNavigation } from 'expo-router';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { View } from 'react-native';
+import { SafeAreaView } from 'react-native';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -34,14 +34,14 @@ export default function App() {
     }, [navigation, fetchLocationData]);
 
     return (
-      <View style={AppStyles.container}>
+      <SafeAreaView style={AppStyles.container}>
         <MapComponent onMapRef={(ref) => (mapRef.current = ref)} />
         <MapControls 
           mapRef={mapRef}
           onLayoutComplete={handleLayoutComplete}
         />
         <WeatherBox />
-      </View>
+      </SafeAreaView>
     );
   };
 
