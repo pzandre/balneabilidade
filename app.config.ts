@@ -5,7 +5,7 @@ module.exports = {
     "description": "App para consultar a balneabilidade das praias de Guarapari",
     "slug": "balneabilidade",
     "owner": "andrepz",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "platforms": [
       "android"
     ],
@@ -21,8 +21,7 @@ module.exports = {
     },
     "plugins": [
       "expo-font",
-      "expo-router",
-      "expo-splash-screen"
+      "expo-router"
     ],
     "newArchEnabled": true,
     "android": {

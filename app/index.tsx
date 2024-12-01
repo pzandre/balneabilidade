@@ -5,11 +5,9 @@ import { MapControls } from '@/components/MapControls';
 import { AppStyles } from '@/components/styles/stylesheets';
 import { WeatherBox } from '@/components/WeatherBox';
 
-import { SplashScreen, useNavigation } from 'expo-router';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useNavigation } from 'expo-router';
+import React, { useEffect, useRef, useState } from 'react';
 import { View } from 'react-native';
-
-SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -18,12 +16,6 @@ export default function App() {
   const AppContent = () => {
     const { fetchLocationData } = useMap();
     const navigation = useNavigation();
-
-    const handleLayoutComplete = useCallback(() => {
-      if (appIsReady) {
-        SplashScreen.hide();
-      }
-    }, [appIsReady]);
 
     useEffect(() => {
       const unsubscribe = navigation.addListener('focus', () => {
@@ -38,7 +30,6 @@ export default function App() {
         <MapComponent onMapRef={(ref) => (mapRef.current = ref)} />
         <MapControls 
           mapRef={mapRef}
-          onLayoutComplete={handleLayoutComplete}
         />
         <WeatherBox />
       </View>

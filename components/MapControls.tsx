@@ -10,8 +10,7 @@ interface MapControlsProps {
 }
 
 export const MapControls: React.FC<MapControlsProps> = ({ 
-  mapRef, 
-  onLayoutComplete 
+  mapRef
 }) => {
   const { centerRegion, defaultZoom } = useMap();
 
@@ -27,10 +26,6 @@ export const MapControls: React.FC<MapControlsProps> = ({
       { duration: 1000 }
     );
   }, [centerRegion, defaultZoom]);
-
-  React.useEffect(() => {
-    onLayoutComplete?.();
-  }, [onLayoutComplete]);
 
   return (
     <View style={MapControlsStyles.container}>
