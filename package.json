@@ -15,10 +15,7 @@
   "expo": {
     "doctor": {
       "reactNativeDirectoryCheck": {
-        "exclude": [
-          "lucide-react-native",
-          "@expo-google-fonts/inter"
-        ]
+        "listUnknownPackages": false
       }
     }
   },
