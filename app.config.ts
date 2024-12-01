@@ -1,28 +1,33 @@
+
 module.exports = {
   "expo": {
     "name": "Balneabilidade Guarapari",
+    "description": "App para consultar a balneabilidade das praias de Guarapari",
     "slug": "balneabilidade",
-    "version": "1.0.0",
+    "owner": "andrepz",
+    "version": "1.0.1",
+    "platforms": [
+      "android"
+    ],
+    "githubUrl": "https://github.com/pzandre/balneabilidade",
     "orientation": "portrait",
+    "userInterfaceStyle": "light",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
-    "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
-    "splash": {
-      "image": "./assets/images/logo.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff",
-      "imageWidth": 100
-    },
-    "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.balneabilidade.balneabilidade",
-      "config": {
-        "googleMapsApiKey": process.env.GOOGLE_MAPS_API_KEY
+    "scheme": "balneabilidadeguarapari",
+    "extra": {
+      "eas": {
+        "projectId": "fe727cc8-c224-4c77-8a6e-dc455bc1d861",
       }
     },
+    "plugins": [
+      "expo-font",
+      "expo-router",
+      "expo-splash-screen"
+    ],
+    "newArchEnabled": true,
     "android": {
       "package": "com.balneabilidade.balneabilidade",
+      "versionCode": 4,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icon_adaptive_fore.png",
         "backgroundColor": "#ffffff"
@@ -33,23 +38,8 @@ module.exports = {
         }
       }
     },
-    "web": {
-      "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/00FF00pin_64.png"
-    },
-    "plugins": [
-      "expo-font",
-      "expo-router",
-      "expo-splash-screen"
-    ],
     "experiments": {
       "typedRoutes": true
-    },
-    "extra": {
-      "eas": {
-        "projectId": "fe727cc8-c224-4c77-8a6e-dc455bc1d861",
-      }
     }
   }
 }
