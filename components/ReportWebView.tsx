@@ -1,16 +1,15 @@
-import React from 'react';
+import { ReportWebViewStyles } from '@/components/styles/stylesheets';
+import { FC, useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { WebView } from 'react-native-webview';
 
-import { ReportWebViewStyles } from '@/components/styles/stylesheets';
-
-const ReportWebView: React.FC = () => {
+const ReportWebView: FC = () => {
   const backendUrl = process.env.EXPO_PUBLIC_BACKEND_URL || "http://localhost:8000/api/";
   const backendApiKey = process.env.EXPO_PUBLIC_BACKEND_API_KEY;
-  const [reportData, setReportData] = React.useState<{ posted_at: string, url: string } | null>(null);
+  const [reportData, setReportData] = useState<{ posted_at: string, url: string } | null>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchReportData = async () => {
       try {
         const response = await fetch(
@@ -36,7 +35,7 @@ const ReportWebView: React.FC = () => {
     };
 
     fetchReportData();
-  }, []);
+  }, [backendApiKey, backendUrl]);
 
   if (!reportData) {
     return (

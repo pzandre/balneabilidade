@@ -1,9 +1,9 @@
 import { useMap } from '@/components/contexts/MapContext';
 import { LastUpdateDisplayStyles } from '@/components/styles/stylesheets';
-import React from 'react';
-import { Text, View } from 'react-native';
+import { FC } from 'react';
+import { SafeAreaView, Text } from 'react-native';
 
-export const LastUpdateDisplay: React.FC = () => {
+export const LastUpdateDisplay: FC = () => {
   const { lastUpdateTime } = useMap();
 
   if (!lastUpdateTime) return null;
@@ -16,12 +16,10 @@ export const LastUpdateDisplay: React.FC = () => {
   };
 
   return (
-    <View style={LastUpdateDisplayStyles.container}>
-      <View style={LastUpdateDisplayStyles.badge}>
-        <Text style={LastUpdateDisplayStyles.text}>
-          Atualizado às: {formatTime(lastUpdateTime)}
-        </Text>
-      </View>
-    </View>
+    <SafeAreaView style={LastUpdateDisplayStyles.container}>
+      <Text style={LastUpdateDisplayStyles.text}>
+        Atualizado às: {formatTime(lastUpdateTime)}
+      </Text>
+    </SafeAreaView>
   );
 };

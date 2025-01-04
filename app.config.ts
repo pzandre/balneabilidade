@@ -6,7 +6,7 @@ const config: ExpoConfig = {
   description: "App para consultar a balneabilidade das praias de Guarapari",
   slug: "balneabilidade",
   owner: "andrepz",
-  version: "1.0.0",
+  version: "1.1.0",
   platforms: [
     "android"
   ],
@@ -42,7 +42,6 @@ const config: ExpoConfig = {
   newArchEnabled: true,
   android: {
     package: "com.balneabilidade.balneabilidade",
-    versionCode: 4,
     adaptiveIcon: {
       foregroundImage: "./assets/images/icon_adaptive_fore.png",
       backgroundColor: "#ffffff"

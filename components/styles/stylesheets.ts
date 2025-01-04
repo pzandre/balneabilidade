@@ -41,8 +41,6 @@ const LastUpdateDisplayStyles = StyleSheet.create({
     left: 16,
     zIndex: 1000,
     opacity: 0.6,
-  },
-  badge: {
     backgroundColor: 'rgba(0, 0, 0, 0.7)',
     paddingHorizontal: 15,
     paddingVertical: 6,
@@ -84,11 +82,10 @@ const WeatherBoxStyles = StyleSheet.create({
     minHeight: 60,
     minWidth: 60,
     justifyContent: 'center',
-  },
-  weatherContent: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
+
   },
   temperatureText: {
     fontSize: 20,

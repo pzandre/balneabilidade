@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import { FC, ReactNode, createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { Alert } from 'react-native';
 import { Region } from 'react-native-maps';
 
@@ -17,15 +17,17 @@ interface MapContextType {
   defaultZoom: number;
   fetchLocationData: () => Promise<void>;
   lastUpdateTime: Date | null;
+  mapRef?: any;
 }
 
 const MapContext = createContext<MapContextType | undefined>(undefined);
 
-export const MapProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const MapProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [locationData, setLocationData] = useState<LocationData[]>([]);
   const [lastUpdateTime, setLastUpdateTime] = useState<Date | null>(null);
   const backendUrl = process.env.EXPO_PUBLIC_BACKEND_URL || "http://localhost:8000/api/";
   const backendApiKey = process.env.EXPO_PUBLIC_BACKEND_API_KEY
+  const mapRef = useRef<any>();
 
   const defaultZoom = 13;
   const centerRegion: Region = {
@@ -35,7 +37,7 @@ export const MapProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     longitudeDelta: 0.0421,
   };
 
-  const fetchLocationData = async () => {
+  const fetchLocationData = useCallback(async () => {
     try {
       const response = await fetch(
         backendUrl + 'locations/',
@@ -46,10 +48,10 @@ export const MapProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         }
       );
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error('Error fetching location data ', await response.json());
       }
       const data = await response.json();
-      const results = data.results.map((result: any) => ({
+      const results = data.results.map((result: LocationData) => ({
         id: result.id,
         latitude: Number(result.latitude),
         longitude: Number(result.longitude),
@@ -68,15 +70,15 @@ export const MapProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       );
       console.error('Error fetching location data:', error);
     }
-  };
+  }, [backendApiKey, backendUrl]);
 
   useEffect(() => {
     fetchLocationData();
-    
+
     const interval = setInterval(fetchLocationData, 60000);
-    
+
     return () => clearInterval(interval);
-  }, []);
+  }, [fetchLocationData]);
 
   const value = {
     locationData,
@@ -84,6 +86,7 @@ export const MapProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     defaultZoom,
     fetchLocationData,
     lastUpdateTime,
+    mapRef,
   };
 
   return <MapContext.Provider value={value}>{children}</MapContext.Provider>;

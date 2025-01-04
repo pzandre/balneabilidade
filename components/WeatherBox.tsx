@@ -1,40 +1,41 @@
 import { useWeather } from '@/components/contexts/WeatherContext';
 import { WeatherBoxStyles } from '@/components/styles/stylesheets';
 import WeatherCondition from '@/constants/WeatherConditions';
-import { Cloud, CloudFog, CloudRain, CloudSnow, Sun } from 'lucide-react-native';
-import React from 'react';
-import { ActivityIndicator, Text, View } from 'react-native';
+import { FC } from 'react';
+import { ActivityIndicator, SafeAreaView, Text } from 'react-native';
+
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 interface WeatherIconProps {
   condition: WeatherCondition;
   size?: number;
 }
 
-const WeatherIcon: React.FC<WeatherIconProps> = ({ condition, size = 24 }) => {
+const WeatherIcon: FC<WeatherIconProps> = ({ condition, size = 24 }) => {
   switch (condition) {
     case 'sunny':
-      return <Sun size={size} color="#FFD700" />;
+      return <MaterialCommunityIcons name="weather-sunny" size={24} color="#FFD700" />;
     case 'cloudy':
-      return <Cloud size={size} color="#808080" />;
+      return <MaterialCommunityIcons name="weather-cloudy" size={24} color="#808080" />;
     case 'rainy':
-      return <CloudRain size={size} color="#4682B4" />;
+      return <MaterialCommunityIcons name="weather-pouring" size={size} color="#4682B4" />;
     case 'snowy':
-      return <CloudSnow size={size} color="#B0E0E6" />;
+      return <MaterialCommunityIcons name="weather-snowy-heavy" size={size} color="#B0E0E6" />;
     case 'foggy':
-      return <CloudFog size={size} color="#778899" />;
+      return <MaterialCommunityIcons name="weather-fog" size={24} color="#778899" />
     default:
-      return <Sun size={size} color="#FFD700" />;
+      return <MaterialCommunityIcons name="weather-cloudy-clock" size={24} color="#FFD700" />;
   }
 };
 
-export const WeatherBox: React.FC = () => {
+export const WeatherBox: FC = () => {
   const { weather, isLoading } = useWeather();
 
   if (isLoading && !weather) {
     return (
-      <View style={WeatherBoxStyles.weatherContainer}>
-        <ActivityIndicator size="small" color="#0000ff" />
-      </View>
+      <SafeAreaView style={WeatherBoxStyles.weatherContainer}>
+        <ActivityIndicator size="small" />
+      </SafeAreaView>
     );
   }
 
@@ -43,13 +44,11 @@ export const WeatherBox: React.FC = () => {
   }
 
   return (
-    <View style={WeatherBoxStyles.weatherContainer}>
-      <View style={WeatherBoxStyles.weatherContent}>
-        <WeatherIcon condition={weather.condition} />
-        <Text style={WeatherBoxStyles.temperatureText}>
-          {weather.temperature}°C
-        </Text>
-      </View>
-    </View>
+    <SafeAreaView style={WeatherBoxStyles.weatherContainer}>
+      <WeatherIcon condition={weather.condition} />
+      <Text style={WeatherBoxStyles.temperatureText}>
+        {weather.temperature}°C
+      </Text>
+    </SafeAreaView>
   );
 };

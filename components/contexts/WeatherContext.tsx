@@ -1,5 +1,5 @@
 import WeatherCondition from '@/constants/WeatherConditions';
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, ReactNode, useCallback, useContext, useEffect, useState } from 'react';
 
 interface WeatherData {
   temperature: number;
@@ -15,13 +15,13 @@ interface WeatherContextType {
 
 const WeatherContext = createContext<WeatherContextType | undefined>(undefined);
 
-export function WeatherProvider({ children }: { children: React.ReactNode }) {
+export function WeatherProvider({ children }: { children: ReactNode }) {
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const backendUrl = process.env.EXPO_PUBLIC_BACKEND_URL || "http://localhost:8000/api/";
   const backendApiKey = process.env.EXPO_PUBLIC_BACKEND_API_KEY;
 
-  const fetchWeather = async () => {
+  const fetchWeather = useCallback(async () => {
     setIsLoading(true);
     try {
       const response = await fetch(
@@ -48,15 +48,13 @@ export function WeatherProvider({ children }: { children: React.ReactNode }) {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [backendApiKey, backendUrl, weather]);
 
   useEffect(() => {
     fetchWeather();
-    
     const interval = setInterval(fetchWeather, 60000);
-    
     return () => clearInterval(interval);
-  }, []);
+  }, [fetchWeather]);
 
   return (
     <WeatherContext.Provider value={{ weather, setWeather, fetchWeather, isLoading }}>
