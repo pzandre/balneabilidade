@@ -6,11 +6,13 @@ import { WeatherBox } from '@/components/WeatherBox';
 import { PaperProvider, Portal } from 'react-native-paper';
 
 import { useNavigation } from 'expo-router';
-import React, { useEffect, useRef, useState } from 'react';
+import * as SplashScreen from 'expo-splash-screen';
+import React, { useEffect, useRef } from 'react';
 import { View } from 'react-native';
 
+SplashScreen.preventAutoHideAsync();
+
 export default function App() {
-  const [appIsReady, setAppIsReady] = useState(false);
   const mapRef = useRef<any>();
 
   const AppContent = () => {
@@ -20,6 +22,7 @@ export default function App() {
     useEffect(() => {
       const unsubscribe = navigation.addListener('focus', () => {
         fetchLocationData();
+        SplashScreen.hideAsync()
       });
   
       return unsubscribe;
@@ -36,23 +39,6 @@ export default function App() {
       </PaperProvider>
     );
   };
-
-  useEffect(() => {
-    async function prepare() {
-      try {
-        await new Promise(resolve => setTimeout(resolve, 2000));
-      } catch (e) {
-        console.warn(e);
-      } finally {
-        setAppIsReady(true);
-      }
-    }
-    prepare();
-  }, []);
-
-  if (!appIsReady) {
-    return null;
-  }
 
   return (
     <WeatherProvider>
