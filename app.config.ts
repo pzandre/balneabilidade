@@ -28,7 +28,14 @@ const config: ExpoConfig = {
       {
         backgroundColor: "#ffffff",
         image: "./assets/images/logo.png",
-        imageWidth: 100
+        dark: {
+          backgroundColor: "#ffffff",
+          image: "./assets/images/logo.png",
+        },
+        android: {
+          backgroundColor: "#ffffff",
+          image: "./assets/images/logo.png",
+        }
       }
     ]
   ],
