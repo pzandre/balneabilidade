@@ -1,4 +1,4 @@
-import { ReportWebViewStyles } from '@/components/styles/stylesheets';
+import { WebViewStyles } from '@/components/styles/stylesheets';
 import { FC, useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -25,8 +25,7 @@ const ReportWebView: FC = () => {
           } else {
             return response.json();
           }
-        }
-        )
+        })
 
         setReportData(response);
       } catch (error) {
@@ -39,16 +38,14 @@ const ReportWebView: FC = () => {
 
   if (!reportData) {
     return (
-      <SafeAreaView style={[ReportWebViewStyles.container, ReportWebViewStyles.horizontal]}>
+      <SafeAreaView style={[WebViewStyles.container, WebViewStyles.horizontal]}>
         <ActivityIndicator size="large" />
       </SafeAreaView>
     );
   }
 
   return (
-    <SafeAreaView style={[ReportWebViewStyles.container, ReportWebViewStyles.horizontal]}>
-      <WebView source={{ uri: reportData.url }} />
-    </SafeAreaView>
+    <WebView style={[WebViewStyles.container, WebViewStyles.horizontal]} source={{ uri: reportData.url }} />
   )
 };
 
