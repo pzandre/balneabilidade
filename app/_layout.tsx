@@ -42,6 +42,18 @@ const Layout = () => {
           title: 'Relatório de Balneabilidade',
         }}
       />
+      <Stack.Screen
+        name="privacy"
+        options={{
+          title: 'Política de Privacidade',
+        }}
+      />
+      {/* <Stack.Screen
+        name="terms"
+        options={{
+          title: 'Termos de Serviço',
+        }}
+      /> */}
 
     </Stack>
   );

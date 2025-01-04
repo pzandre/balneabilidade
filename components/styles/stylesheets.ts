@@ -94,7 +94,7 @@ const WeatherBoxStyles = StyleSheet.create({
   },
 });
 
-const ReportWebViewStyles = StyleSheet.create({
+const WebViewStyles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -107,4 +107,5 @@ const ReportWebViewStyles = StyleSheet.create({
 });
 
 
-export { AppStyles, LastUpdateDisplayStyles, MapComponentStyles, MapControlsStyles, ReportWebViewStyles, WeatherBoxStyles };
+export { AppStyles, LastUpdateDisplayStyles, MapComponentStyles, MapControlsStyles, WeatherBoxStyles, WebViewStyles };
+

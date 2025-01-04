@@ -48,18 +48,14 @@ export const MenuButton: FC = () => {
           <Menu.Item
             onPress={() => {
               closeMenu();
-            }}
-            title="Sobre nós"
-          />
-          <Menu.Item
-            onPress={() => {
-              closeMenu();
+              router.push("/privacy");
             }}
             title="Política de Privacidade"
           />
           <Menu.Item
             onPress={() => {
               closeMenu();
+              router.push("/terms");
             }}
             title="Termos de Uso"
           />
