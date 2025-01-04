@@ -48,13 +48,12 @@ const Layout = () => {
           title: 'Política de Privacidade',
         }}
       />
-      {/* <Stack.Screen
+      <Stack.Screen
         name="terms"
         options={{
           title: 'Termos de Serviço',
         }}
-      /> */}
-
+      />
     </Stack>
   );
 };
