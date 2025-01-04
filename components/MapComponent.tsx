@@ -61,7 +61,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({ onMapRef }) => {
             <Menu.Item
               onPress={() => {
                 closeMenu();
-                // router.push("/report");
+                router.push("/report");
               }}
               title="Relatório de Balneabilidade"
             />
