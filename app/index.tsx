@@ -1,9 +1,9 @@
 import { MapProvider, useMap } from '@/components/contexts/MapContext';
 import { WeatherProvider } from '@/components/contexts/WeatherContext';
 import { MapComponent } from '@/components/MapComponent';
-import { MapControls } from '@/components/MapControls';
 import { AppStyles } from '@/components/styles/stylesheets';
 import { WeatherBox } from '@/components/WeatherBox';
+import { PaperProvider, Portal } from 'react-native-paper';
 
 import { useNavigation } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
@@ -26,13 +26,14 @@ export default function App() {
     }, [navigation, fetchLocationData]);
 
     return (
-      <View style={AppStyles.container}>
-        <MapComponent onMapRef={(ref) => (mapRef.current = ref)} />
-        <MapControls 
-          mapRef={mapRef}
-        />
-        <WeatherBox />
-      </View>
+      <PaperProvider>
+          <View style={AppStyles.container}>
+        <Portal>
+            <MapComponent onMapRef={(ref) => (mapRef.current = ref)} />
+            <WeatherBox />
+        </Portal>
+          </View>
+      </PaperProvider>
     );
   };
 
