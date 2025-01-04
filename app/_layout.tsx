@@ -35,7 +35,14 @@ const Layout = () => {
         options={{
           title: 'Balneabilidade',
         }}
+      />      
+      <Stack.Screen
+        name="report"
+        options={{
+          title: 'Relatório de Balneabilidade',
+        }}
       />
+
     </Stack>
   );
 };
