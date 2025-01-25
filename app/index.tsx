@@ -5,52 +5,60 @@ import { MapComponent } from "@/components/MapComponent";
 import { MenuButton } from "@/components/MenuButton";
 import { AppStyles } from "@/components/styles/stylesheets";
 import { WeatherBox } from "@/components/WeatherBox";
-import { hideAsync, preventAutoHideAsync } from "expo-splash-screen";
-import { useEffect, useState } from "react";
+import * as SplashScreen from 'expo-splash-screen';
+import { useCallback, useEffect, useState } from 'react';
 import { SafeAreaView } from "react-native";
 import { PaperProvider } from "react-native-paper";
 
-preventAutoHideAsync();
+SplashScreen.preventAutoHideAsync();
+
+SplashScreen.setOptions({
+  duration: 1000,
+  fade: true,
+});
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
 
-  const AppContent = () => {
-    return (
-      <SafeAreaView style={AppStyles.container}>
-        <MapComponent />
-        <WeatherBox />
-        <MenuButton />
-        <LastUpdateDisplay />
-      </SafeAreaView>
-    );
-  };
-
   useEffect(() => {
     async function prepare() {
       try {
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        await new Promise(resolve => setTimeout(resolve, 2000));
       } catch (e) {
         console.warn(e);
       } finally {
         setAppIsReady(true);
-        await hideAsync();
       }
     }
+
     prepare();
   }, []);
+
+  const onLayoutRootView = useCallback(() => {
+    if (appIsReady) {
+      SplashScreen.hide();
+    }
+  }, [appIsReady]);
 
   if (!appIsReady) {
     return null;
   }
 
   return (
-    <WeatherProvider>
-      <MapProvider>
-        <PaperProvider>
-          <AppContent />
-        </PaperProvider>
-      </MapProvider>
-    </WeatherProvider>
+    <SafeAreaView
+      style={AppStyles.container}
+      onLayout={onLayoutRootView}
+    >
+      <WeatherProvider>
+        <MapProvider>
+          <PaperProvider>
+            <MapComponent />
+            <WeatherBox />
+            <MenuButton />
+            <LastUpdateDisplay />
+          </PaperProvider>
+        </MapProvider>
+      </WeatherProvider>
+    </SafeAreaView>
   );
 }

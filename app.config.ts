@@ -5,13 +5,13 @@ const config: ExpoConfig = {
   name: "Balneabilidade Guarapari",
   description: "App para consultar a balneabilidade das praias de Guarapari",
   slug: "balneabilidade",
-  owner: "andrepz",
   version: "1.1.0",
+  orientation: "portrait",
+  owner: "andrepz",
   platforms: [
     "android"
   ],
   githubUrl: "https://github.com/pzandre/balneabilidade",
-  orientation: "portrait",
   userInterfaceStyle: "light",
   icon: "./assets/images/icon.png",
   scheme: "balneabilidadeguarapari",
@@ -23,14 +23,20 @@ const config: ExpoConfig = {
   plugins: [
     "expo-font",
     "expo-router",
-    "expo-splash-screen",
-  ],
+    [
+      "expo-splash-screen",
+      {
+        "backgroundColor": "#ecfbfc",
+        "image": "./assets/images/splash-icon.png",
+        "imageWidth": 200
+      }
+    ]  ],
   newArchEnabled: true,
   android: {
     package: "com.balneabilidade.balneabilidade",
     adaptiveIcon: {
-      foregroundImage: "./assets/images/icon_adaptive_fore.png",
-      backgroundColor: "#ffffff"
+      foregroundImage: "./assets/images/adaptive-icon.png",
+      backgroundColor: "#ecfbfc"
     },
     config: {
       googleMaps: {
