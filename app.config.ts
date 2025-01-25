@@ -23,21 +23,7 @@ const config: ExpoConfig = {
   plugins: [
     "expo-font",
     "expo-router",
-    [
-      "expo-splash-screen",
-      {
-        backgroundColor: "#ffffff",
-        image: "./assets/images/logo.png",
-        dark: {
-          backgroundColor: "#ffffff",
-          image: "./assets/images/logo.png",
-        },
-        android: {
-          backgroundColor: "#ffffff",
-          image: "./assets/images/logo.png",
-        }
-      }
-    ]
+    "expo-splash-screen",
   ],
   newArchEnabled: true,
   android: {
