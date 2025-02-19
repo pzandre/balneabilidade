@@ -38,6 +38,10 @@ const config: ExpoConfig = {
       foregroundImage: "./assets/images/adaptive-icon.png",
       backgroundColor: "#ecfbfc"
     },
+    splash: {
+      backgroundColor: "#ecfbfc",
+      image: "./assets/images/splash-icon.png",
+    },
     config: {
       googleMaps: {
         apiKey: process.env.GOOGLE_MAPS_API_KEY

@@ -34,7 +34,7 @@ export const MenuButton: FC = () => {
           visible={menuVisible}
           onDismiss={closeMenu}
           anchor={
-            <Button labelStyle={MapControlsStyles.label} onPress={openMenu}>MENU</Button>
+            <Button labelStyle={MapControlsStyles.label} onPress={openMenu}>Menu</Button>
           }
         >
           <Menu.Item onPress={focusMap} title="Centralizar mapa" />
